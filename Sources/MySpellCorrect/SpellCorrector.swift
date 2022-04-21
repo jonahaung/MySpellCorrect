@@ -9,22 +9,7 @@ import UIKit
 
 public struct SpellCorrector {
     
-    static let myanamrWords: [String] = {
-        var items = [String]()
-        var resourceUrl = Bundle.main.resourceURL?.appendingPathComponent("syllables")
-//        resourceUrl?.appendPathComponent("syllables")
-//        resourceUrl?.appendPathExtension("txt")
-        
-        if let url = resourceUrl {
-            do {
-                let string = try String(contentsOf: url, encoding: .utf8)
-                items = string.components(separatedBy: .whitespacesAndNewlines)
-            } catch {
-                print(error)
-            }
-        }
-        return items
-    }()
+    static let myanamrWords: [String] = myanmarOneWords.components(separatedBy: .whitespacesAndNewlines)
     
     public static func correctedMyanmarText(_ string: String) -> String {
         var correctedLines = [String]()
@@ -65,31 +50,3 @@ public struct SpellCorrector {
         return correctedLines.joined(separator: "\n")
     }
 }
-private class BundleFinder {}
-
-extension Foundation.Bundle {
-    /// Returns the resource bundle associated with the current Swift module.
-    static var module: Bundle = {
-        let bundleName = "MySpellCorrect"
-
-        let candidates = [
-            // Bundle should be present here when the package is linked into an App.
-            Bundle.main.resourceURL,
-
-            // Bundle should be present here when the package is linked into a framework.
-            Bundle(for: BundleFinder.self).resourceURL,
-
-            // For command-line tools.
-            Bundle.main.bundleURL,
-        ]
-
-        for candidate in candidates {
-            let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
-            if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
-                return bundle
-            }
-        }
-        fatalError("unable to find bundle named SwiftyChords_SwiftyChords")
-    }()
-}
-
