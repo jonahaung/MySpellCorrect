@@ -11,9 +11,9 @@ public struct SpellCorrector {
     
     static let myanamrWords: [String] = {
         var items = [String]()
-        var resourceUrl = Bundle.module.resourceURL
-        resourceUrl?.appendPathComponent("syllables")
-        resourceUrl?.appendPathExtension("txt")
+        var resourceUrl = Bundle.main.resourceURL?.appendingPathComponent("syllables")
+//        resourceUrl?.appendPathComponent("syllables")
+//        resourceUrl?.appendPathExtension("txt")
         
         if let url = resourceUrl {
             do {
