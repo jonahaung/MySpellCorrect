@@ -1,3 +1,3 @@
 # MySpellCorrect
 
-A description of this package.
+Spelling corrector for Myanmar texts 
